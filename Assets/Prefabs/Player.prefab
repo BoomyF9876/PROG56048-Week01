@@ -551,6 +551,7 @@ GameObject:
   - component: {fileID: 696200157637638030}
   - component: {fileID: 4928886318820872339}
   - component: {fileID: 6467448394382856509}
+  - component: {fileID: 110866291576034196}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -642,18 +643,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4777e6a65f164487eaf83dbf4932a019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BotController
-  moveSpeed: 2
-  runSpeed: 4
-  rotationSpeed: 10
-  stopDistance: 0.25
-  runningThreshold: 4
-  target: {x: 5, y: 0, z: 5}
   capsuleRadius: 0.35
   capsuleHeight: 1.8
   collisionDistance: 0.15
   obstacleMask:
     serializedVersion: 2
     m_Bits: 343
+  moveSpeed: 2
+  runSpeed: 4
+  rotationSpeed: 10
+  stopDistance: 0.25
+  runningThreshold: 4
+  target: {x: 5, y: 0, z: 5}
 --- !u!114 &696200157637638030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -666,6 +667,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0297009a75b814fa9b474183871b654d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BotControllerV2
+  capsuleRadius: 0.35
+  capsuleHeight: 1.8
+  collisionDistance: 0.15
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 343
   targetTransform: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
   useTransformTarget: 1
@@ -674,12 +681,6 @@ MonoBehaviour:
   rotationSpeed: 10
   stopDistance: 0.25
   runningThreshold: 3
-  capsuleRadius: 0.35
-  capsuleHeight: 1.8
-  collisionDistance: 0.15
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 343
 --- !u!114 &4928886318820872339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -713,15 +714,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77e8712fe05344419990f1b2d9c2e94c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FreeMovementMotor
-  moveSpeed: 2
-  runMultiplier: 2
-  turnSpeed: 10
   capsuleRadius: 0.35
   capsuleHeight: 1.8
   collisionDistance: 0.15
   obstacleMask:
     serializedVersion: 2
     m_Bits: 343
+  moveSpeed: 2
+  runMultiplier: 2
+  turnSpeed: 10
+--- !u!136 &110866291576034196
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4669767841289675184}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2.5548966
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.7774483, z: 0}
 --- !u!1 &4993293512630751633
 GameObject:
   m_ObjectHideFlags: 0

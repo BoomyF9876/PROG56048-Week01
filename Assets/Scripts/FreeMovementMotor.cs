@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 /// Free movement motor that allows WASD movement in world/relative space 
 /// with collision sliding.
 /// </summary>
-public class FreeMovementMotor : MovementMotorBase
+public class FreeMovementMotor : CapsuleMover
 {
     [Header("Movement")]
     [Tooltip("The speed at which the bot moves.")]
@@ -14,28 +14,13 @@ public class FreeMovementMotor : MovementMotorBase
     [Tooltip("The speed at which the bot rotates.")]
     [SerializeField] private float turnSpeed = 10f;
 
-    [Header("Collision")]
-    [Tooltip("The radius of the capsule.")]
-    [SerializeField] private float capsuleRadius = 0.35f;
-    [Tooltip("The height of the capsule.")]
-    [SerializeField] private float capsuleHeight = 1.8f;
-    [Tooltip("The distance at which the bot stops.")]
-    [SerializeField] private float collisionDistance = 0.15f;
-    [Tooltip("The layer mask for the obstacles.")]
-    [SerializeField] private LayerMask obstacleMask = ~0;
-
     private float currentSpeed;
     private Vector3 moveDir;
-
-    private void Update()
-    {
-        HandleMovement();
-    }
 
     /// <summary>
     /// Handles movement logic.
     /// </summary>
-    private void HandleMovement()
+    override protected void HandleMovement()
     {
         Vector2 input = GetInput();
         Vector3 inputDir = new Vector3(input.x, 0f, input.y);
@@ -85,48 +70,10 @@ public class FreeMovementMotor : MovementMotorBase
     /// <summary>
     /// Stops the movement.
     /// </summary>
-    private void StopMovement()
+    new private void StopMovement()
     {
-        IsMoving = false;
-        IsRunning = false;
-        Speed = 0f;
-        ForwardSpeed = 0f;
-        TurnSpeed = 0f;
+        base.StopMovement();
         moveDir = Vector3.zero;
-        MoveDirection = Vector3.zero;
-    }
-
-    /// <summary>
-    /// Checks if the character can move in the given direction.
-    /// </summary>
-    /// <param name="input">Input to check.</param>
-    /// <param name="position">Position to check.</param>
-    /// <param name="direction">Direction to check.</param>
-    /// <returns>True if the character can move in the given direction, false otherwise.</returns>
-    private bool CanMove(Vector2 input, Vector3 position, ref Vector3 direction)
-    {
-        // Try move in desired direction
-        bool canMove = !Physics.CapsuleCast(position, position + Vector3.up * capsuleHeight, capsuleRadius, direction, collisionDistance, obstacleMask);
-        if (canMove) return true;
-
-        // Sliding on X
-        direction = new Vector3(input.x, 0, 0).normalized;
-        if (direction != Vector3.zero)
-        {
-            canMove = !Physics.CapsuleCast(position, position + Vector3.up * capsuleHeight, capsuleRadius, direction, collisionDistance, obstacleMask);
-            if (canMove) return true;
-        }
-
-        // Sliding on Z
-        direction = new Vector3(0, 0, input.y).normalized;
-        if (direction != Vector3.zero)
-        {
-            canMove = !Physics.CapsuleCast(position, position + Vector3.up * capsuleHeight, capsuleRadius, direction, collisionDistance, obstacleMask);
-            if (canMove) return true;
-        }
-
-        direction = Vector3.zero;
-        return false;
     }
 
     /// <summary>
