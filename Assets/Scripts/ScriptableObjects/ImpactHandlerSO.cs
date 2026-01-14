@@ -1,15 +1,13 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ImpactHandlerSO", menuName = "ScriptableObjects/ImpactHandlerSO")]
-public class ImpactHandlerSO : ScriptableObject
+public class ImpactHandlerSO : ScriptableObject, IImpactProvider
 {
     [Header("Impact Effect")]
     [Tooltip("Impact effect to be instantiated on collision")]
-    [SerializeField] private GameObject impactEffect;
+    [SerializeField] public GameObject impactEffect;
     [Tooltip("Life span of the impact effect")]
-    [SerializeField] private float impactEffectLifeSpan = 10f;
-
-    public GameObject ImpactEffect => impactEffect;
+    [SerializeField] public float impactEffectLifeSpan = 10f;
 
     /// <summary>
     /// Applies impact effect to the target

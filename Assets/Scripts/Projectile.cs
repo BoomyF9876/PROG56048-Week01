@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class Projectile : MonoBehaviour
+public abstract class Projectile : MonoBehaviour, IProjectile
 {
     [Header("General")]
     [Tooltip("Life span of the projectile")]
@@ -11,18 +11,23 @@ public abstract class Projectile : MonoBehaviour
     protected Rigidbody rb;
     protected AudioSource audioSource;
 
+    protected void Awake()
+    {
+        
+    }
+
     protected void Start()
     {
         rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
         Destroy(gameObject, lifeSpan);
-        Init();
+        InitMovement();
     }
 
     /// <summary>
     /// Initializes the bullet
     /// </summary>
-    protected void Init()
+    protected void InitMovement()
     {
         rb.linearVelocity = transform.forward * speed;
         audioSource.Play();
@@ -30,8 +35,12 @@ public abstract class Projectile : MonoBehaviour
 
     protected void OnCollisionEnter(Collision collision)
     {
+        HandleCollision(collision);
         audioSource.Stop();
         Destroy(gameObject);
     }
 
+    public abstract void Launch();
+
+    protected abstract void HandleCollision(Collision collision);
 }

@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 /// Utility class to track mouse position in 3D space and manage a visual pointer.
 /// </summary>
 [DisallowMultipleComponent]
-public class MouseUtil : MonoBehaviour
+public class MouseUtil : Singleton<MouseUtil>
 {
     [Header("Requirements")]
     [Tooltip("The visual object representing the mouse pointer in the world.")]
@@ -26,15 +26,9 @@ public class MouseUtil : MonoBehaviour
     /// </summary>
     public bool IsEnabled => showPointer;
 
-    /// <summary>
-    /// Singleton instance of MouseUtil.
-    /// </summary>
-    public static MouseUtil Instance { get; private set; }
-
-    private void Awake()
+    override public void Awake()
     {
-        InitializeSingleton();
-
+        base.Awake();
         _mainCamera = Camera.main;
         _lastMousePosition = transform.position;
 
@@ -57,19 +51,6 @@ public class MouseUtil : MonoBehaviour
         if (!showPointer) return;
 
         UpdateMousePosition();
-    }
-
-/// <summary>
-/// Initializes the singleton instance of MouseUtil.
-/// </summary>
-    private void InitializeSingleton()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        Instance = this;
     }
 
     /// <summary>

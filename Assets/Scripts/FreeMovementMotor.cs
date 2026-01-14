@@ -75,25 +75,4 @@ public class FreeMovementMotor : CapsuleMover
         base.StopMovement();
         moveDir = Vector3.zero;
     }
-
-    /// <summary>
-    /// Gets the input from the keyboard
-    /// </summary>
-    private Vector2 GetInput()
-    {
-        Vector2 input = Vector2.zero;
-        input.x += Keyboard.current.aKey.isPressed ? -1 : 0;
-        input.x += Keyboard.current.dKey.isPressed ? +1 : 0;
-        input.y += Keyboard.current.wKey.isPressed ? +1 : 0;
-        input.y += Keyboard.current.sKey.isPressed ? -1 : 0;
-        return input;
-    }
-
-    /// <summary>
-    /// Gets the normalized input
-    /// </summary>
-    private Vector2 GetInputNormalized()
-    {
-        return GetInput().normalized;
-    }
 }

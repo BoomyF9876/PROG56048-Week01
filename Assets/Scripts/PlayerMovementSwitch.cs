@@ -21,8 +21,11 @@ public class PlayerMovementSwitch : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("Collision Enter...");
+        Debug.Log(collision.gameObject.name);
         if (collision.gameObject.TryGetComponent(out PlayerController target))
         {
+            Debug.Log("Hits Player...");
             collision.gameObject.GetComponent<TankMotor>().enabled = false;
             collision.gameObject.GetComponent<PointAndClickMotor>().enabled = false;
             collision.gameObject.GetComponent<FollowTargetMotor>().enabled = false;

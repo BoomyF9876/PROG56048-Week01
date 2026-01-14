@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3206a20b5a02e984896b3244d440d2c4, type: 3}
+  m_Name: ImpactHandler
+  m_EditorClassIdentifier: Assembly-CSharp::ImpactHandlerSO
+  impactEffect: {fileID: 406088643243873763, guid: e481967f3db0540d9958d6105546d28c, type: 3}
+  impactEffectLifeSpan: 10

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public abstract class CapsuleMover : MovementMotorBase
 {
@@ -61,5 +62,26 @@ public abstract class CapsuleMover : MovementMotorBase
         ForwardSpeed = 0f;
         TurnSpeed = 0f;
         MoveDirection = Vector3.zero;
+    }
+
+    /// <summary>
+    /// Gets the input from the keyboard
+    /// </summary>
+    protected Vector2 GetInput()
+    {
+        Vector2 input = Vector2.zero;
+        input.x += Keyboard.current.aKey.isPressed ? -1 : 0;
+        input.x += Keyboard.current.dKey.isPressed ? +1 : 0;
+        input.y += Keyboard.current.wKey.isPressed ? +1 : 0;
+        input.y += Keyboard.current.sKey.isPressed ? -1 : 0;
+        return input;
+    }
+
+    /// <summary>
+    /// Gets the normalized input
+    /// </summary>
+    protected Vector2 GetInputNormalized()
+    {
+        return GetInput().normalized;
     }
 }
