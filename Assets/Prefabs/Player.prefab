@@ -553,6 +553,7 @@ GameObject:
   - component: {fileID: 6467448394382856509}
   - component: {fileID: 110866291576034196}
   - component: {fileID: 7293759437708228707}
+  - component: {fileID: 6929406038512488949}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -710,7 +711,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4669767841289675184}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 77e8712fe05344419990f1b2d9c2e94c, type: 3}
   m_Name: 
@@ -739,7 +740,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -774,6 +775,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6929406038512488949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4669767841289675184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d116ffe5fd9fe9a43b4f75d49860597a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
 --- !u!1 &4993293512630751633
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,19 +1,19 @@
 using UnityEngine;
 
-public class MainMenuState : IGameState
+public class SavingState : IGameState
 {
     public void EnterState(GameManager gameManager)
     {
-        Debug.Log("Enter Main Menu State...");
+        Debug.Log("Enter Saving State...");
     }
 
     public void UpdateState(GameManager gameManager)
     {
-        Debug.Log("Update Main Menu State...");
+        Debug.Log("Update Saving State...");
     }
 
     public void ExitState(GameManager gameManager)
     {
-        Debug.Log("Exit Main Menu State...");
+        Debug.Log("Exit Saving State...");
     }
 }

@@ -14,13 +14,13 @@ public class PlayerController : MonoBehaviour
         MovementMotorBase[] motors = GetComponents<MovementMotorBase>();
         foreach (MovementMotorBase motor in motors)
         {
-            if(motor.enabled)
+            if (motor.enabled)
             {
                 this.motor = motor;
                 break;
             }
         }
-        if(motor == null)
+        if (motor == null)
         {
             Debug.LogError($"[{nameof(PlayerController)}] No movement motor found");
         }
@@ -84,5 +84,45 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawLine(topSphereCenter + movementOffset, bottomSphereCenter + movementOffset);
         Gizmos.DrawLine(topSphereCenter - movementOffset, bottomSphereCenter - movementOffset);
         #endregion
+    }
+
+    private void OnEnable()
+    {
+        EventBus.Subscribe<MotorChangeEvent>(OnMotorChange);
+    }
+
+    private void OnDisable()
+    {
+        EventBus.Unsubscribe<MotorChangeEvent>(OnMotorChange);
+    }
+
+    private void OnMotorChange(MotorChangeEvent data)
+    {
+        //ChangeMotor(data.MotorType);
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        Debug.Log(collision.gameObject.name);
+        if (collision.gameObject.TryGetComponent(out PlayerMovementSwitch target))
+        {
+            switch (target.GetMovementType())
+            {
+                case MovementType.Tank:
+                    PlayerManager.Instance.SwitchState(new CombatState());
+                    break;
+                case MovementType.FollowTarget:
+                    PlayerManager.Instance.SwitchState(new FollowTargetState());
+                    break;
+                case MovementType.FreeMovement:
+                    PlayerManager.Instance.SwitchState(new ExplorationState());
+                    break;
+                case MovementType.PointAndClick:
+                    PlayerManager.Instance.SwitchState(new PointAndClickState());
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

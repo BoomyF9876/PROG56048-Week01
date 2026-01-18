@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class GameManager : Singleton<GameManager>
+public class PlayerManager : Singleton<PlayerManager>
 {
-    private IGameState currentState;
-    public void SwitchState(IGameState newState)
+    private IPlayerState currentState;
+    public void SwitchState(IPlayerState newState)
     {
         currentState?.ExitState(this);
         currentState = newState;
@@ -13,5 +13,9 @@ public class GameManager : Singleton<GameManager>
     public void Update()
     {
         currentState.UpdateState(this);
+    }
+    public void Start()
+    {
+        SwitchState(new ExplorationState());
     }
 }

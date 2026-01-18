@@ -1,19 +1,19 @@
 using UnityEngine;
 
-public class MainMenuState : IGameState
+public class PauseState : IGameState
 {
     public void EnterState(GameManager gameManager)
     {
-        Debug.Log("Enter Main Menu State...");
+        Debug.Log("Enter Pause State...");
     }
 
     public void UpdateState(GameManager gameManager)
     {
-        Debug.Log("Update Main Menu State...");
+        Debug.Log("Update Pause State...");
     }
 
     public void ExitState(GameManager gameManager)
     {
-        Debug.Log("Exit Main Menu State...");
+        Debug.Log("Exit Pause State...");
     }
 }
