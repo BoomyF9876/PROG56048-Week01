@@ -5,6 +5,17 @@ using UnityEngine;
 /// </summary>
 public abstract class MovementMotorBase : MonoBehaviour
 {
+    [Header("Input")]
+    [SerializeField] protected InputReader inputReader;
+
+    protected virtual void OnEnable()
+    {
+        if (inputReader != null)
+        {
+            //inputReader.MoveEvent += OnMove;
+        }
+    }
+
     /// <summary>True if the player is moving (based on motor logic).</summary>
     public bool IsMoving { get; protected set; }
 

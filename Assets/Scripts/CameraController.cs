@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 /// <summary>
 /// Camera controller
@@ -25,10 +26,28 @@ public class CameraController : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        ChangeCameraMode(cameraMode.ToString());
     }
-  
+
     private void OnEnable()
     {
-        animator.SetTrigger(cameraMode.ToString());
+        EventBus.Subscribe<MotorChangeEvent>(OnMotorChange);
+    }
+
+    private void OnDisable()
+    {
+        EventBus.Unsubscribe<MotorChangeEvent>(OnMotorChange);
+    }
+
+    private void OnMotorChange(MotorChangeEvent data)
+    {
+        ChangeCameraMode(data.MotorType.ToString());
+    }
+
+    private void ChangeCameraMode(string type)
+    {
+        Enum.TryParse(type, out CameraMode parsed);
+        cameraMode = parsed;
+        animator.SetTrigger(type);
     }
 }

@@ -2,10 +2,18 @@ using TMPro;
 using UnityEngine;
 using static UnityEngine.UI.ScrollRect;
 
+public enum MotorType
+{
+    FreeMovement,
+    PointAndClick,
+    FollowTarget,
+    Tank
+};
+
 public struct MotorChangeEvent
 {
-    public MotorChanger.MotorType MotorType;
-    public MotorChangeEvent(MotorChanger.MotorType type)
+    public MotorType MotorType;
+    public MotorChangeEvent(MotorType type)
     {
         MotorType = type;
     }
@@ -13,14 +21,6 @@ public struct MotorChangeEvent
 
 public class MotorChanger : MonoBehaviour
 {
-    public enum MotorType
-    {
-        FreeMovement,
-        PointAndClick,
-        FollowTarget,
-        Tank
-    };
-
     [SerializeField] private MotorType motorType = MotorType.FreeMovement;
 
     public void Start()
@@ -33,8 +33,8 @@ public class MotorChanger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.parent != null &&
-            other.transform.parent.TryGetComponent(out PlayerController playerController))
+        if (other.gameObject != null &&
+            other.gameObject.TryGetComponent(out PlayerController playerController))
         {
             EventBus.Publish(new MotorChangeEvent(motorType));
         }

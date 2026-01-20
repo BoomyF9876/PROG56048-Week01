@@ -58,6 +58,11 @@ public class LocomotionAnimator : MonoBehaviour
         turnSpeedHash = Animator.StringToHash(turnSpeed);
     }
 
+    private void OnMotorChange(MotorChangeEvent data)
+    {
+        LateUpdate();
+    }
+
     private void LateUpdate()
     {
         if (animator == null || motor == null) return;
@@ -79,4 +84,15 @@ public class LocomotionAnimator : MonoBehaviour
         animator.SetFloat(forwardSpeedHash, motor.ForwardSpeed);
         animator.SetFloat(turnSpeedHash, motor.TurnSpeed);
     }
+
+    private void OnEnable()
+    {
+        EventBus.Subscribe<MotorChangeEvent>(OnMotorChange);
+    }
+
+    private void OnDisable()
+    {
+        EventBus.Unsubscribe<MotorChangeEvent>(OnMotorChange);
+    }
+
 }

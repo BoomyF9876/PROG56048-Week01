@@ -98,31 +98,27 @@ public class PlayerController : MonoBehaviour
 
     private void OnMotorChange(MotorChangeEvent data)
     {
-        //ChangeMotor(data.MotorType);
+        ChangeMotor(data.MotorType);
     }
 
-    private void OnTriggerEnter(Collider collision)
+    private void ChangeMotor(MotorType motorType)
     {
-        Debug.Log(collision.gameObject.name);
-        if (collision.gameObject.TryGetComponent(out PlayerMovementSwitch target))
+        switch (motorType)
         {
-            switch (target.GetMovementType())
-            {
-                case MovementType.Tank:
-                    PlayerManager.Instance.SwitchState(new CombatState());
-                    break;
-                case MovementType.FollowTarget:
-                    PlayerManager.Instance.SwitchState(new FollowTargetState());
-                    break;
-                case MovementType.FreeMovement:
-                    PlayerManager.Instance.SwitchState(new ExplorationState());
-                    break;
-                case MovementType.PointAndClick:
-                    PlayerManager.Instance.SwitchState(new PointAndClickState());
-                    break;
-                default:
-                    break;
-            }
+            case MotorType.Tank:
+                PlayerManager.Instance.SwitchState(new CombatState());
+                break;
+            case MotorType.FollowTarget:
+                PlayerManager.Instance.SwitchState(new FollowTargetState());
+                break;
+            case MotorType.FreeMovement:
+                PlayerManager.Instance.SwitchState(new ExplorationState());
+                break;
+            case MotorType.PointAndClick:
+                PlayerManager.Instance.SwitchState(new PointAndClickState());
+                break;
+            default:
+                break;
         }
     }
 }
