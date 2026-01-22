@@ -645,6 +645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4777e6a65f164487eaf83dbf4932a019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BotController
+  inputReader: {fileID: 0}
   capsuleRadius: 0.35
   capsuleHeight: 1.8
   collisionDistance: 0.15
@@ -669,6 +670,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0297009a75b814fa9b474183871b654d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BotControllerV2
+  inputReader: {fileID: 0}
   capsuleRadius: 0.35
   capsuleHeight: 1.8
   collisionDistance: 0.15
@@ -695,6 +697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac75e624382264f8ebfd9d1ea3bdf5d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BotControllerV3
+  inputReader: {fileID: 0}
   capsuleRadius: 0.35
   capsuleHeight: 1.8
   collisionDistance: 0.15
@@ -716,6 +719,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77e8712fe05344419990f1b2d9c2e94c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FreeMovementMotor
+  inputReader: {fileID: 0}
   capsuleRadius: 0.35
   capsuleHeight: 1.8
   collisionDistance: 0.15
@@ -1627,7 +1631,7 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: 040d33ead89f241759f9c429774cad15, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 64a112fcfd3aa4a76924f0d5ed93d482, type: 2}
+      objectReference: {fileID: 9100000, guid: 4f70e8c9c036a554791894b6988a4c4f, type: 2}
     - target: {fileID: 5866666021909216657, guid: 040d33ead89f241759f9c429774cad15, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0

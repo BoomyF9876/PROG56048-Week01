@@ -67,10 +67,11 @@ public class LocomotionAnimator : MonoBehaviour
     {
         if (animator == null || motor == null) return;
 
-        bool isMovingLinearly = Mathf.Abs(motor.ForwardSpeed) > 0.01f;
+        // bumped up from 0.1 to 0.5 because of the gamepad input for turning while idle
+        bool isMovingLinearly = Mathf.Abs(motor.ForwardSpeed) > 0.5f;
         bool isTurningInPlace = !isMovingLinearly && Mathf.Abs(motor.TurnSpeed) > 0.01f;
 
-        bool isIdle = motor.ForwardSpeed == 0f;
+        bool isIdle = !isMovingLinearly;
         bool isRun = isMovingLinearly && motor.IsRunning;
         bool isWalk = isMovingLinearly && !motor.IsRunning;
         bool isTurnLeft = isTurningInPlace && motor.TurnSpeed < 0;
