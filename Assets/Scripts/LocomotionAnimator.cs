@@ -71,15 +71,15 @@ public class LocomotionAnimator : MonoBehaviour
         bool isMovingLinearly = Mathf.Abs(motor.ForwardSpeed) > 0.5f;
         bool isTurningInPlace = !isMovingLinearly && Mathf.Abs(motor.TurnSpeed) > 0.01f;
 
-        bool isIdle = !isMovingLinearly;
-        bool isRun = isMovingLinearly && motor.IsRunning;
-        bool isWalk = isMovingLinearly && !motor.IsRunning;
+        // bool isIdle = !isMovingLinearly;
+        // bool isRun = isMovingLinearly && motor.IsRunning;
+        // bool isWalk = isMovingLinearly && !motor.IsRunning;
         bool isTurnLeft = isTurningInPlace && motor.TurnSpeed < 0;
         bool isTurnRight = isTurningInPlace && motor.TurnSpeed > 0;
 
-        animator.SetBool(idleHash, isIdle);
-        animator.SetBool(walkHash, isWalk);
-        animator.SetBool(runHash, isRun);
+        // animator.SetBool(idleHash, isIdle);
+        // animator.SetBool(walkHash, isWalk);
+        // animator.SetBool(runHash, isRun);
 
         animator.SetFloat(speedHash, motor.Speed);
         animator.SetFloat(forwardSpeedHash, motor.ForwardSpeed);

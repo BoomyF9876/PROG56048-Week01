@@ -2,18 +2,20 @@ using UnityEngine;
 
 public class PauseState : IGameState
 {
+    private GameObject obj = GameObject.FindFirstObjectByType<PauseController>().gameObject.transform.Find("PauseMenu").gameObject;
+
     public void EnterState(GameManager gameManager)
     {
-        Debug.Log("Enter Pause State...");
+        obj.SetActive(true);
     }
 
     public void UpdateState(GameManager gameManager)
     {
-        Debug.Log("Update Pause State...");
+        //Debug.Log("Update Pause State...");
     }
 
     public void ExitState(GameManager gameManager)
     {
-        Debug.Log("Exit Pause State...");
+        obj.SetActive(false);
     }
 }

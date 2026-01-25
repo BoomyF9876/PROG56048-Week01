@@ -5,9 +5,9 @@ using UnityEngine.InputSystem;
 [CreateAssetMenu(fileName = "InputReader", menuName = "Scriptable Objects/InputReader")]
 public class InputReader : ScriptableObject, InputSystem_Actions.IPlayerActions
 {
-    public event Action<Vector2> MoveEvent;
-    public event Action<bool> SprintEvent;
-    public event Action AttackEvent;
+    // public event Action<Vector2> MoveEvent;
+    // public event Action<bool> SprintEvent;
+    // public event Action AttackEvent;
 
     private InputSystem_Actions inputActions;
 
@@ -62,6 +62,11 @@ public class InputReader : ScriptableObject, InputSystem_Actions.IPlayerActions
     }
 
     public void OnNext(InputAction.CallbackContext context)
+    {
+
+    }
+
+    public void OnPause(InputAction.CallbackContext context)
     {
 
     }

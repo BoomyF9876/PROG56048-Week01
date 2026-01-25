@@ -49,7 +49,7 @@ public abstract class CapsuleMover : MovementMotorBase
 
     protected void Update()
     {
-        HandleMovement();
+        if (GameManager.Instance.IsGamePlaying()) HandleMovement();
     }
 
     protected abstract void HandleMovement();

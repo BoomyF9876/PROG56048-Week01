@@ -14,4 +14,14 @@ public class GameManager : Singleton<GameManager>
     {
         currentState.UpdateState(this);
     }
+
+    public bool IsGamePlaying()
+    {
+        return currentState is PlayingState;
+    }
+
+    public IGameState GetCurrentState()
+    {
+        return currentState;
+    }
 }

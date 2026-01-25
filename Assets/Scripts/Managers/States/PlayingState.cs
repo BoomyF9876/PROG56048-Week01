@@ -9,11 +9,11 @@ public class PlayingState : IGameState
 
     public void UpdateState(GameManager gameManager)
     {
-        Debug.Log("Update Playing State...");
+        //Debug.Log("Update Playing State...");
     }
 
     public void ExitState(GameManager gameManager)
     {
-        Debug.Log("Exit Playing State...");
+        //Debug.Log("Exit Playing State...");
     }
 }

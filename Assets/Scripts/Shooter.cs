@@ -35,7 +35,7 @@ public sealed class Shooter : MonoBehaviour
 
     private void Update()
     {
-        if(Mouse.current.leftButton.wasPressedThisFrame) {
+        if(GameManager.Instance.IsGamePlaying() && Mouse.current.leftButton.wasPressedThisFrame) {
             if (Time.time < nextFireTime) return;
             if (bulletPrefab != null && muzzle != null)
             {

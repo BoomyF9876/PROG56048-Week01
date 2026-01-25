@@ -9,11 +9,11 @@ public class MainMenuState : IGameState
 
     public void UpdateState(GameManager gameManager)
     {
-        Debug.Log("Update Main Menu State...");
+        //Debug.Log("Update Main Menu State...");
     }
 
     public void ExitState(GameManager gameManager)
     {
-        Debug.Log("Exit Main Menu State...");
+        //Debug.Log("Exit Main Menu State...");
     }
 }
