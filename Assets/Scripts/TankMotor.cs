@@ -19,6 +19,7 @@ public class TankMotor : CapsuleMover
     override protected void HandleMovement()
     {
         Vector2 input = GetInput();
+
         if (input == Vector2.zero)
         {
             StopMovement();

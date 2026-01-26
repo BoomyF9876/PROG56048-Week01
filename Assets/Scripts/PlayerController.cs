@@ -8,9 +8,11 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Show gizmos for debugging")]
     [SerializeField] private bool showGizmos = true;
     private MovementMotorBase motor;
+    private AudioSource audioSource;
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         MovementMotorBase[] motors = GetComponents<MovementMotorBase>();
         foreach (MovementMotorBase motor in motors)
         {
@@ -120,5 +122,6 @@ public class PlayerController : MonoBehaviour
             default:
                 break;
         }
+        audioSource.Play();
     }
 }
