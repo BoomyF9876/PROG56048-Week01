@@ -3,10 +3,15 @@ using UnityEngine;
 public class PlayerManager : Singleton<PlayerManager>
 {
     private IPlayerState currentState;
+    private IPlayerState lastState;
+
     public void SwitchState(IPlayerState newState)
     {
         currentState?.ExitState(this);
+
+        lastState = currentState;
         currentState = newState;
+
         currentState.EnterState(this);
     }
 
@@ -17,5 +22,10 @@ public class PlayerManager : Singleton<PlayerManager>
     public void Start()
     {
         SwitchState(new ExplorationState());
+    }
+
+    public IPlayerState GetLastState()
+    {
+        return lastState;
     }
 }
