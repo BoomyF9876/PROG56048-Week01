@@ -11,7 +11,7 @@ public class ShootCommand: ICommand
 
     public void Execute()
     {
-        //shooter.Shoot();
+        shooter.Shoot();
     }
     
     public void Undo()

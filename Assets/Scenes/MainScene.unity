@@ -210,7 +210,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 20801405}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 289d3a819ac539041aaef27f4e4084fc, type: 3}
+  m_Script: {fileID: 11500000, guid: 61149e88dd3004149b8b2545f46803c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
 --- !u!1001 &56099746
@@ -1582,8 +1582,8 @@ GameObject:
   - component: {fileID: 1020626923}
   - component: {fileID: 1020626922}
   - component: {fileID: 1020626921}
-  - component: {fileID: 1020626925}
   - component: {fileID: 1020626926}
+  - component: {fileID: 1020626927}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -1677,18 +1677,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1020626925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1020626920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e59428c8255b35b4fba10b41b200412f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PauseController
 --- !u!114 &1020626926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1701,6 +1689,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9144178e77761dd43a27791395bbcc5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
+--- !u!114 &1020626927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020626920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4992ec5777fc4445b4368da2dde8ec2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseController
 --- !u!1 &1090115035
 GameObject:
   m_ObjectHideFlags: 0
@@ -2199,7 +2199,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1020626925}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PauseController, Assembly-CSharp
         m_MethodName: ResumeGame
         m_Mode: 1
@@ -2519,6 +2519,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2038334925750551856, guid: 26556dcaa9b5748458cc07360a07cfca, type: 3}
+      propertyPath: AllowSliding
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2038334925750551856, guid: 26556dcaa9b5748458cc07360a07cfca, type: 3}
+      propertyPath: obstacleMask.m_Bits
+      value: 1015
+      objectReference: {fileID: 0}
     - target: {fileID: 4669767841289675184, guid: 26556dcaa9b5748458cc07360a07cfca, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2529,7 +2537,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6467448394382856509, guid: 26556dcaa9b5748458cc07360a07cfca, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

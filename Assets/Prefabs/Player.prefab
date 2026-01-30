@@ -547,8 +547,9 @@ GameObject:
   - component: {fileID: 6068533238937020739}
   - component: {fileID: 1723157332815939411}
   - component: {fileID: 59067647467654942}
-  - component: {fileID: 4117885564734866290}
+  - component: {fileID: 2038334925750551856}
   - component: {fileID: 696200157637638030}
+  - component: {fileID: 4117885564734866290}
   - component: {fileID: 4928886318820872339}
   - component: {fileID: 6467448394382856509}
   - component: {fileID: 110866291576034196}
@@ -591,7 +592,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4669767841289675184}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f254cb9398eac4e32ae46d323b365263, type: 3}
+  m_Script: {fileID: 11500000, guid: 067c8e04391d93542b4ef28f230c60c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   showGizmos: 1
@@ -604,7 +605,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4669767841289675184}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af622203de5f445b5a1c070a2c3fe1b3, type: 3}
+  m_Script: {fileID: 11500000, guid: bc15d2c1a85f32a4e8b4beb0c7b9285e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Shooter
   muzzle: {fileID: 3179560112126585121}
@@ -634,6 +635,41 @@ MonoBehaviour:
   speed: Speed
   forwardSpeed: ForwardSpeed
   turnSpeed: TurnSpeed
+--- !u!114 &2038334925750551856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4669767841289675184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 157f6aee0050be643b3dc0584165ec01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CapsuleMover
+  capsuleRadius: 0.35
+  capsuleHeight: 1.8
+  collisionDistance: 0.15
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  AllowSliding: 1
+--- !u!114 &696200157637638030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4669767841289675184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e65fa7c37d63324eb5194a3c46669f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BotControllerV2
+  inputReader: {fileID: 11400000, guid: f481029d64d3b704ba61642ece962c34, type: 2}
+  moveSpeed: 2
+  runMultiplier: 2
+  turnSpeed: 10
 --- !u!114 &4117885564734866290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -643,41 +679,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4669767841289675184}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4777e6a65f164487eaf83dbf4932a019, type: 3}
+  m_Script: {fileID: 11500000, guid: 381f4823306854d4c9e6f498448680ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BotController
-  inputReader: {fileID: 0}
-  capsuleRadius: 0.35
-  capsuleHeight: 1.8
-  collisionDistance: 0.15
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 343
-  moveSpeed: 2
-  runSpeed: 4
-  rotationSpeed: 10
-  stopDistance: 0.25
-  runningThreshold: 4
-  target: {x: 5, y: 0, z: 5}
---- !u!114 &696200157637638030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4669767841289675184}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0297009a75b814fa9b474183871b654d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BotControllerV2
-  inputReader: {fileID: 0}
-  capsuleRadius: 0.35
-  capsuleHeight: 1.8
-  collisionDistance: 0.15
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 343
+  inputReader: {fileID: 11400000, guid: f481029d64d3b704ba61642ece962c34, type: 2}
   targetTransform: {fileID: 0}
   target: {x: 0, y: 0, z: 0}
   useTransformTarget: 1
@@ -685,7 +690,7 @@ MonoBehaviour:
   runSpeed: 4
   rotationSpeed: 10
   stopDistance: 0.25
-  runningThreshold: 3
+  runningThreshold: 4
 --- !u!114 &4928886318820872339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -695,19 +700,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 4669767841289675184}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac75e624382264f8ebfd9d1ea3bdf5d6, type: 3}
+  m_Script: {fileID: 11500000, guid: 05a724ed00e1da1408545efafb7d2786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BotControllerV3
-  inputReader: {fileID: 0}
-  capsuleRadius: 0.35
-  capsuleHeight: 1.8
-  collisionDistance: 0.15
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 343
+  inputReader: {fileID: 11400000, guid: f481029d64d3b704ba61642ece962c34, type: 2}
   moveSpeed: 2
   runSpeed: 4
-  rotationSpeed: 180
+  rotationSpeed: 10
+  stopDistance: 0.25
+  runningThreshold: 4
+  target: {x: 0, y: 0, z: 0}
 --- !u!114 &6467448394382856509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -717,19 +719,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4669767841289675184}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77e8712fe05344419990f1b2d9c2e94c, type: 3}
+  m_Script: {fileID: 11500000, guid: d9cce5da3d64a0044b388236187a28ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FreeMovementMotor
-  inputReader: {fileID: 0}
-  capsuleRadius: 0.35
-  capsuleHeight: 1.8
-  collisionDistance: 0.15
-  obstacleMask:
-    serializedVersion: 2
-    m_Bits: 343
+  inputReader: {fileID: 11400000, guid: f481029d64d3b704ba61642ece962c34, type: 2}
   moveSpeed: 2
-  runMultiplier: 2
-  turnSpeed: 10
+  runSpeed: 4
+  rotationSpeed: 180
 --- !u!136 &110866291576034196
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1124,10 +1120,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7606527186950599694}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34151c06fb31e4ab689052a270294f8b, type: 3}
+  m_Script: {fileID: 11500000, guid: 036dd2f6d5f017547b400817212a7414, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
-  animator: {fileID: 419465883825275515}
+  animator: {fileID: 0}
   cameraMode: 3
 --- !u!95 &419465883825275515
 Animator:

@@ -123,7 +123,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 687388309311023574}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 969d4ff5eed5a46308298a2b809156e7, type: 3}
+  m_Script: {fileID: 11500000, guid: 4a9c059c710efc44494753484993efb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Brick
   health: 100

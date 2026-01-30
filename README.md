@@ -16,3 +16,5 @@ Asset credits:
     FreeMovement.png - https://pixabay.com/images/search/walking%20sign/
 Known issues:
     Player animation is paused when exits freemovement state
+Repo:
+    https://github.com/BoomyF9876/PROG56048-Week01
