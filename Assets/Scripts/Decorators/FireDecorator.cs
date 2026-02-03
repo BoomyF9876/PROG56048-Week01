@@ -5,7 +5,7 @@ public class FireDecorator : WeaponDecorator
     {
     }
 
-    public virtual void Fire()
+    public override void Fire()
     {
         //TODO: WeaponType = fire;
         wrappedWeapon.Fire();

@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.Pool;
+using System.Collections;
 
 public abstract class Projectile : MonoBehaviour, IProjectile
 {
@@ -11,17 +13,28 @@ public abstract class Projectile : MonoBehaviour, IProjectile
     protected Rigidbody rb;
     protected AudioSource audioSource;
 
+    private IObjectPool<Projectile> pool;
+    private Coroutine coroutine;
+
     protected void Awake()
     {
         
     }
 
-    protected void Start()
+    protected void OnEnable()
     {
         rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
-        Destroy(gameObject, lifeSpan);
+
+        coroutine = StartCoroutine(ExecuteAfterTime(lifeSpan));
         InitMovement();
+    }
+
+    private IEnumerator ExecuteAfterTime(float delayInSeconds)
+    {
+        yield return new WaitForSeconds(delayInSeconds);
+
+        Release();
     }
 
     /// <summary>
@@ -37,10 +50,21 @@ public abstract class Projectile : MonoBehaviour, IProjectile
     {
         HandleCollision(collision);
         audioSource.Stop();
-        Destroy(gameObject);
+        StopCoroutine(coroutine);
+        Release();
     }
 
     public abstract void Launch();
+
+    public void SetPool(IObjectPool<Projectile> pool)
+    {
+        this.pool = pool;
+    }
+
+    protected void Release()
+    {
+        pool.Release(this);
+    }
 
     protected abstract void HandleCollision(Collision collision);
 }

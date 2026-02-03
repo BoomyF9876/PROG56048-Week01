@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 /// <summary>
 /// Player shooter
 /// </summary>
@@ -21,6 +22,8 @@ public sealed class Shooter : MonoBehaviour
     [Tooltip("The fire cooldown.")]
     [SerializeField] private float fireCooldown = 0.25f;
 
+    [SerializeField] private ProjectilePool projectilePool;
+
     private int shootHash;
     private float nextFireTime;
     private IWeapon weapon;
@@ -30,25 +33,22 @@ public sealed class Shooter : MonoBehaviour
         if (animator == null) animator = GetComponent<Animator>();
         if (animator == null) animator = GetComponentInChildren<Animator>();
         if (animator == null) Debug.LogError($"[{nameof(Shooter)}] Animator not found.");
+        if (projectilePool == null) projectilePool = GetComponent<ProjectilePool>();
         shootHash = Animator.StringToHash(shootTrigger);
-    }
-
-    private void Update()
-    {
-        if(GameManager.Instance.IsGamePlaying() && Mouse.current.leftButton.wasPressedThisFrame) {
-            if (Time.time < nextFireTime) return;
-            if (bulletPrefab != null && muzzle != null)
-            {
-                Rigidbody bullet = Instantiate(bulletPrefab, muzzle.position, muzzle.rotation);
-                nextFireTime = Time.time + fireCooldown;
-                animator.SetTrigger(shootHash);
-            }
-        }
     }
 
     public void Shoot()
     {
         if (Time.time < nextFireTime) return;
+
+        if (GameManager.Instance.IsGamePlaying() && muzzle != null)
+        {
+            Projectile bullet = projectilePool.GetBulletFromPool(muzzle.position, muzzle.rotation);
+            bullet.Launch();
+
+            nextFireTime = Time.time + fireCooldown;
+            animator.SetTrigger(shootHash);
+        }
 
         //if (powerUpManager != null && powerUpManager.GetCurrentWeapon() != null)
         //{

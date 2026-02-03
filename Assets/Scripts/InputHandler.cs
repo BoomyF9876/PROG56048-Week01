@@ -13,6 +13,11 @@ public class InputHandler : MonoBehaviour
 
     private void Start()
     {
+        if (shooter == null)
+        {
+            shooter = GetComponent<Shooter>();
+        }
+
         fireCommand = new ShootCommand(shooter);
         //jumpCommand = new JumpCommand(motor);
     }
@@ -21,6 +26,12 @@ public class InputHandler : MonoBehaviour
     {
         inputReader.AttackEvent += OnAttack;
         inputReader.JumpEvent += OnJump;
+    }
+
+    private void OnDisable()
+    {
+        inputReader.AttackEvent -= OnAttack;
+        inputReader.JumpEvent -= OnJump;
     }
 
     private void OnAttack() => fireCommand?.Execute();

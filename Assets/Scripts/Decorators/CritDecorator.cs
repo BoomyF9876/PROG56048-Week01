@@ -9,7 +9,7 @@ public class CritDecorator: WeaponDecorator
         critChance = 10;
     }
 
-    public virtual void Fire()
+    public override void Fire()
     {
         int critIndex = Random.Range(0, 99);
         bool isCrit = critIndex % (critChance > 2 ? critChance : 2) == 0;

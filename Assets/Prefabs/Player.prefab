@@ -555,7 +555,9 @@ GameObject:
   - component: {fileID: 110866291576034196}
   - component: {fileID: 7293759437708228707}
   - component: {fileID: 947267593300192877}
+  - component: {fileID: 7425497490060111345}
   - component: {fileID: 6929406038512488949}
+  - component: {fileID: 6056274998767174308}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -613,6 +615,7 @@ MonoBehaviour:
   shootTrigger: Shoot
   bulletPrefab: {fileID: 7521162982894881443, guid: d7a779d7ee4e54f94add0547992fad73, type: 3}
   fireCooldown: 0.25
+  projectilePool: {fileID: 0}
 --- !u!114 &59067647467654942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -873,6 +876,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7425497490060111345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4669767841289675184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b6dfca7bd76d44c8b373506251d07b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InputHandler
+  inputReader: {fileID: 11400000, guid: f481029d64d3b704ba61642ece962c34, type: 2}
+  shooter: {fileID: 0}
+  motor: {fileID: 0}
 --- !u!114 &6929406038512488949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -885,6 +903,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d116ffe5fd9fe9a43b4f75d49860597a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerManager
+--- !u!114 &6056274998767174308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4669767841289675184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e56bad9d953617b45a407cdc3fec2df9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectilePool
+  prefab: {fileID: 2948018922307924304, guid: d7a779d7ee4e54f94add0547992fad73, type: 3}
 --- !u!1 &4993293512630751633
 GameObject:
   m_ObjectHideFlags: 0
