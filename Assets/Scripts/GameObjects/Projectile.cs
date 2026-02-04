@@ -15,10 +15,14 @@ public abstract class Projectile : MonoBehaviour, IProjectile
 
     private IObjectPool<Projectile> pool;
     private Coroutine coroutine;
+    private TrailRenderer trailRenderer;
 
     protected void Awake()
     {
-        
+        if (trailRenderer == null)
+        {
+            trailRenderer = GetComponent<TrailRenderer>();
+        }
     }
 
     protected void OnEnable()
@@ -64,6 +68,7 @@ public abstract class Projectile : MonoBehaviour, IProjectile
     protected void Release()
     {
         pool.Release(this);
+        trailRenderer?.Clear();
     }
 
     protected abstract void HandleCollision(Collision collision);

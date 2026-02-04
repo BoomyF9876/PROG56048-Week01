@@ -27,6 +27,8 @@ public sealed class Shooter : MonoBehaviour
     private int shootHash;
     private float nextFireTime;
     private IWeapon weapon;
+    private PowerUpManager powerUpManager;
+
     private void Awake()
     {
         if (muzzle == null) muzzle = transform;
@@ -34,6 +36,7 @@ public sealed class Shooter : MonoBehaviour
         if (animator == null) animator = GetComponentInChildren<Animator>();
         if (animator == null) Debug.LogError($"[{nameof(Shooter)}] Animator not found.");
         if (projectilePool == null) projectilePool = GetComponent<ProjectilePool>();
+        if (powerUpManager == null) powerUpManager = GetComponent<PowerUpManager>();
         shootHash = Animator.StringToHash(shootTrigger);
     }
 

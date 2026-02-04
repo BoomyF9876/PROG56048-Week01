@@ -9,7 +9,7 @@ public class BaseWeapon: IWeapon
         baseDamage = damage;
     }
 
-    public void Fire()
+    public virtual void Fire()
     {
 
     }
