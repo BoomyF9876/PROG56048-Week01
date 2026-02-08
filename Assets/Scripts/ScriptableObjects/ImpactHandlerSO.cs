@@ -9,6 +9,8 @@ public class ImpactHandlerSO : ScriptableObject, IImpactProvider
     [Tooltip("Life span of the impact effect")]
     [SerializeField] public float impactEffectLifeSpan = 10f;
 
+    public GameObject ImpactEffect => impactEffect;
+
     /// <summary>
     /// Applies impact effect to the target
     /// </summary>

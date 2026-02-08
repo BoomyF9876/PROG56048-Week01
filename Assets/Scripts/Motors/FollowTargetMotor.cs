@@ -24,8 +24,9 @@ public class FollowTargetMotor : MovementMotorBase
     [Tooltip("The distance at which the bot runs.")]
     [SerializeField] private float runningThreshold = 4f;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         target = useTransformTarget && targetTransform != null ? targetTransform.position : target;
         StopMovement();
     }
@@ -53,7 +54,7 @@ public class FollowTargetMotor : MovementMotorBase
         Vector3 moveDir = toTarget.normalized;
 
         // Collision check and slide
-        IsMoving = capsuleMover.CanMove(moveDir, transform.position, ref moveDir);
+        IsMoving = CanMove(moveDir, transform.position, ref moveDir);
         MoveDirection = moveDir;
 
         if (IsMoving)
@@ -74,9 +75,15 @@ public class FollowTargetMotor : MovementMotorBase
     protected void StopMovement()
     {
         IsMoving = false;
+        IsRunning = false;
         Speed = 0f;
         ForwardSpeed = 0f;
         TurnSpeed = 0f;
         MoveDirection = Vector3.zero;
+    }
+
+    private bool CanMove(Vector3 input, Vector3 position, ref Vector3 direction)
+    {
+        return capsuleMover.TryApplyMovement(input, position, ref direction);
     }
 }

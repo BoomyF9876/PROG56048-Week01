@@ -46,19 +46,46 @@ public abstract class Projectile : MonoBehaviour, IProjectile
     /// </summary>
     protected void InitMovement()
     {
+        gameObject.SetActive(true);
         rb.linearVelocity = transform.forward * speed;
         audioSource.Play();
     }
 
     protected void OnCollisionEnter(Collision collision)
     {
-        HandleCollision(collision);
         audioSource.Stop();
-        StopCoroutine(coroutine);
         Release();
+
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+            coroutine = null;
+        }
+        HandleCollision(collision);
     }
 
-    public abstract void Launch();
+    public virtual void Launch()
+    {
+
+    }
+
+    public void Fire(Vector3 pos, Quaternion rot)
+    {
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
+
+        transform.position = pos;
+        transform.rotation = rot;
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        trailRenderer?.Clear();
+
+        InitMovement();
+
+        coroutine = StartCoroutine(ExecuteAfterTime(lifeSpan));
+    }
 
     public void SetPool(IObjectPool<Projectile> pool)
     {
@@ -68,7 +95,6 @@ public abstract class Projectile : MonoBehaviour, IProjectile
     protected void Release()
     {
         pool.Release(this);
-        trailRenderer?.Clear();
     }
 
     protected abstract void HandleCollision(Collision collision);

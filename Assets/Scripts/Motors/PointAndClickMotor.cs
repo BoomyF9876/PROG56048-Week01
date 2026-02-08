@@ -21,8 +21,9 @@ public class PointAndClickMotor : MovementMotorBase
     [Tooltip("The target position.")]
     [SerializeField] private Vector3 target;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         target = transform.position;
         StopMovement();
     }
@@ -54,7 +55,7 @@ public class PointAndClickMotor : MovementMotorBase
         Vector3 moveDir = toTarget.normalized;
         
         // Collision check and slide
-        IsMoving = capsuleMover.CanMove(moveDir, transform.position, ref moveDir);
+        IsMoving = CanMove(moveDir, transform.position, ref moveDir);
         MoveDirection = moveDir;
 
         if (IsMoving)
@@ -78,10 +79,16 @@ public class PointAndClickMotor : MovementMotorBase
     private void StopMovement()
     {
         IsMoving = false;
+        IsRunning = false;
         Speed = 0f;
         ForwardSpeed = 0f;
         TurnSpeed = 0f;
+        MoveDirection = Vector3.zero;
         target = transform.position; // Reset target to current position to stop trying to move
     }
 
+    private bool CanMove(Vector3 input, Vector3 position, ref Vector3 direction)
+    {
+        return capsuleMover.TryApplyMovement(direction, position, ref direction);
+    }
 }

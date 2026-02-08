@@ -9,7 +9,6 @@ public class InputReader : ScriptableObject, InputSystem_Actions.IPlayerActions
     public event Action<bool> SprintEvent;
     public event Action<bool> JumpEvent;
     public event Action AttackEvent;
-    public event Action RightClick;
 
     private InputSystem_Actions inputActions;
 
@@ -53,7 +52,10 @@ public class InputReader : ScriptableObject, InputSystem_Actions.IPlayerActions
 
     public void OnSprint(InputAction.CallbackContext context)
     {
-
+        if (context.phase == InputActionPhase.Performed)
+            SprintEvent?.Invoke(true);
+        if (context.phase == InputActionPhase.Canceled)
+            SprintEvent?.Invoke(false);
     }
 
     public void OnInteract(InputAction.CallbackContext context)

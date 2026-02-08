@@ -8,7 +8,7 @@ public class LocomotionAnimator : MonoBehaviour
     [Tooltip("The animator component to control.")]
     [SerializeField] private Animator animator;
     [Tooltip("The movement motor to track.")]
-    [SerializeField] private MovementMotorBase motor;
+    [SerializeField] private PlayerController player;
 
     [Header("Animator Params")]
     [Tooltip("The name of the idle state.")]
@@ -34,23 +34,11 @@ public class LocomotionAnimator : MonoBehaviour
     private void Awake()
     {
         if (animator == null) animator = GetComponentInChildren<Animator>();
-        MovementMotorBase[] motors = GetComponents<MovementMotorBase>();
-        foreach (MovementMotorBase motor in motors)
-        {
-            if(motor.enabled)
-            {
-                this.motor = motor;
-                break;
-            }
-        }
-        if(motor == null)
-        {
-            Debug.LogError($"[{nameof(LocomotionAnimator)}] No movement motor found");
-        }
+        player = GetComponent<PlayerController>();
 
-        idleHash = Animator.StringToHash(idle);
-        walkHash = Animator.StringToHash(walk);
-        runHash = Animator.StringToHash(run);
+        //idleHash = Animator.StringToHash(idle);
+        //walkHash = Animator.StringToHash(walk);
+        //runHash = Animator.StringToHash(run);
         turnLeftHash = Animator.StringToHash(turnLeft);
         turnRightHash = Animator.StringToHash(turnRight);
         speedHash = Animator.StringToHash(speed);
@@ -65,25 +53,25 @@ public class LocomotionAnimator : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (animator == null || motor == null) return;
+        if (animator == null || player.motor == null) return;
 
         // bumped up from 0.1 to 0.5 because of the gamepad input for turning while idle
-        bool isMovingLinearly = Mathf.Abs(motor.ForwardSpeed) > 0.5f;
-        bool isTurningInPlace = !isMovingLinearly && Mathf.Abs(motor.TurnSpeed) > 0.01f;
+        bool isMovingLinearly = Mathf.Abs(player.motor.ForwardSpeed) > 0.5f;
+        bool isTurningInPlace = !isMovingLinearly && Mathf.Abs(player.motor.TurnSpeed) > 0.01f;
 
-        // bool isIdle = !isMovingLinearly;
-        // bool isRun = isMovingLinearly && motor.IsRunning;
-        // bool isWalk = isMovingLinearly && !motor.IsRunning;
-        bool isTurnLeft = isTurningInPlace && motor.TurnSpeed < 0;
-        bool isTurnRight = isTurningInPlace && motor.TurnSpeed > 0;
+        //bool isIdle = !isMovingLinearly;
+        //bool isRun = isMovingLinearly && player.motor.IsRunning;
+        //bool isWalk = isMovingLinearly && !player.motor.IsRunning;
+        bool isTurnLeft = isTurningInPlace && player.motor.TurnSpeed < 0;
+        bool isTurnRight = isTurningInPlace && player.motor.TurnSpeed > 0;
 
-        // animator.SetBool(idleHash, isIdle);
-        // animator.SetBool(walkHash, isWalk);
-        // animator.SetBool(runHash, isRun);
+        //animator.SetBool(idleHash, isIdle);
+        //animator.SetBool(walkHash, isWalk);
+        //animator.SetBool(runHash, isRun);
 
-        animator.SetFloat(speedHash, motor.Speed);
-        animator.SetFloat(forwardSpeedHash, motor.ForwardSpeed);
-        animator.SetFloat(turnSpeedHash, motor.TurnSpeed);
+        animator.SetFloat(speedHash, player.motor.Speed);
+        animator.SetFloat(forwardSpeedHash, player.motor.ForwardSpeed);
+        animator.SetFloat(turnSpeedHash, player.motor.TurnSpeed);
     }
 
     private void OnEnable()

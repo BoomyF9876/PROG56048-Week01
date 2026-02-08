@@ -1,24 +1,23 @@
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
+using static UnityEngine.Rendering.DebugUI.Table;
 public class CritDecorator: WeaponDecorator
 {
-    protected int critChance = 10;
+    protected float critChance = 0.1f;
 
     public CritDecorator(IWeapon weapon): base(weapon)
     {
-        //TODO: Check how many layers of crit
-        critChance = 10;
     }
 
-    public override void Fire()
+    public override Projectile Fire(Vector3 pos, Quaternion rot, ProjectilePool pool)
     {
-        int critIndex = Random.Range(0, 99);
-        bool isCrit = critIndex % (critChance > 2 ? critChance : 2) == 0;
-
-        wrappedWeapon.Fire();
+        Projectile bullet = base.Fire(pos, rot, pool);
+        bullet.GetComponent<Bullet>().crit += critChance;
+        return bullet;
     }
 
-    public override int GetDamage()
+    public override float GetCrit()
     {
-        return base.GetDamage();
+        return base.GetCrit() + critChance;
     }
 }

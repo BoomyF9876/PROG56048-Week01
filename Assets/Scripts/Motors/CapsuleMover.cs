@@ -15,18 +15,15 @@ public class CapsuleMover : MonoBehaviour
 
     public bool AllowSliding = true;
 
-    /// <summary>
-    /// Checks if the character can move in the given direction.
-    /// </summary>
-    /// <param name="inputDir">Input direction.</param>
-    /// <param name="position">Position to check.</param>
-    /// <param name="direction">Direction to check.</param>
-    /// <returns>True if the character can move in the given direction, false otherwise.</returns>
-    public bool CanMove(Vector3 inputDir, Vector3 position, ref Vector3 direction)
+    public bool TryApplyMovement(Vector3 inputDir, Vector3 position, ref Vector3 direction)
     {
         // Try move in desired direction
-        bool canMove = !Physics.CapsuleCast(position, position + Vector3.up * capsuleHeight, capsuleRadius, direction, collisionDistance, obstacleMask);
-        if (canMove) return true;
+        bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * capsuleHeight, capsuleRadius, inputDir, collisionDistance, obstacleMask);
+        if (canMove)
+        {
+            direction = inputDir;
+            return true;
+        }
 
         // No Sliding for TankMotor
         if (!AllowSliding)
@@ -37,43 +34,22 @@ public class CapsuleMover : MonoBehaviour
 
         // Try sliding along world axes towards the target
         // Sliding on X
-        direction = new Vector3(Mathf.Sign(inputDir.x), 0, 0);
-        if (Mathf.Abs(inputDir.x) > 0.01f)
+        direction = new Vector3(inputDir.x, 0, 0).normalized;
+        if (direction != Vector3.zero)
         {
-            canMove = !Physics.CapsuleCast(position, position + Vector3.up * capsuleHeight, capsuleRadius, direction, collisionDistance, obstacleMask);
+            canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * capsuleHeight, capsuleRadius, direction, collisionDistance, obstacleMask);
             if (canMove) return true;
         }
 
         // Sliding on Z
-        direction = new Vector3(0, 0, Mathf.Sign(inputDir.z));
-        if (Mathf.Abs(inputDir.z) > 0.01f)
+        direction = new Vector3(0, 0, inputDir.y).normalized;
+        if (direction != Vector3.zero)
         {
-            canMove = !Physics.CapsuleCast(position, position + Vector3.up * capsuleHeight, capsuleRadius, direction, collisionDistance, obstacleMask);
+            canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * capsuleHeight, capsuleRadius, direction, collisionDistance, obstacleMask);
             if (canMove) return true;
         }
 
         direction = Vector3.zero;
         return false;
-    }
-
-    /// <summary>
-    /// Gets the input from the keyboard
-    /// </summary>
-    protected Vector2 GetInput()
-    {
-        Vector2 input = Vector2.zero;
-        input.x += Keyboard.current.aKey.isPressed ? -1 : 0;
-        input.x += Keyboard.current.dKey.isPressed ? +1 : 0;
-        input.y += Keyboard.current.wKey.isPressed ? +1 : 0;
-        input.y += Keyboard.current.sKey.isPressed ? -1 : 0;
-        return input;
-    }
-
-    /// <summary>
-    /// Gets the normalized input
-    /// </summary>
-    protected Vector2 GetInputNormalized()
-    {
-        return GetInput().normalized;
     }
 }

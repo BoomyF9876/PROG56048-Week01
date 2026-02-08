@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     [Header("Debug")]
     [Tooltip("Show gizmos for debugging")]
     [SerializeField] private bool showGizmos = true;
-    private MovementMotorBase motor;
+    public MovementMotorBase motor;
     private AudioSource audioSource;
 
     private void Start()

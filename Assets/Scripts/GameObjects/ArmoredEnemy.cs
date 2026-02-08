@@ -9,14 +9,13 @@ public class ArmoredEnemy: MonoBehaviour, IVisitableEnemy
         health = GetComponent<HealthComponent>();
     }
 
-    public void Accept(IDamageVisitor visitor, int damage)
+    public void Accept(IDamageVisitor visitor, float damage)
     {
         visitor.VisitArmored(this, damage);
     }
 
-    public void ApplyDamage(int damage, Color numberColor)
+    public void ApplyDamage(float damage, Color numberColor)
     {
         health.TakeDamage(damage);
-        //ShowDamageNumber(damage, numberColor);
     }
 }

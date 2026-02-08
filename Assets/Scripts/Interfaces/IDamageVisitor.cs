@@ -1,5 +1,5 @@
 public interface IDamageVisitor
 {
-    void VisitArmored(ArmoredEnemy enemy, int damage);
-    void VisitFlying(FlyingEnemy enemy, int damage);
+    void VisitArmored(ArmoredEnemy enemy, float damage);
+    void VisitFlying(FlyingEnemy enemy, float damage);
 }

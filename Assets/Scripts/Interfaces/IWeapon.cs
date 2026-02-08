@@ -2,6 +2,10 @@ using UnityEngine;
 
 public interface IWeapon
 {
-    void Fire();
+    Projectile Fire(Vector3 pos, Quaternion rot, ProjectilePool pool);
     int GetDamage();
+
+    float GetCrit();
+
+    DamageType GetDamageType();
 }

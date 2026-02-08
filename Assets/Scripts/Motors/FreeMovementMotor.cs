@@ -25,8 +25,8 @@ public class FreeMovementMotor : MovementMotorBase
         Vector3 inputDir = new Vector3(input.x, 0f, input.y);
         float inputMag = Mathf.Clamp01(inputDir.magnitude);
         
-        bool runHeld = Keyboard.current.shiftKey.isPressed;
-        float targetSpeed = moveSpeed * (runHeld ? runMultiplier : 1f) * inputMag;
+        //bool runHeld = Keyboard.current.shiftKey.isPressed;
+        float targetSpeed = moveSpeed * (IsRunning ? runMultiplier : 1f) * inputMag;
 
         // Apply acceleration
         currentSpeed = Mathf.MoveTowards(currentSpeed, targetSpeed, moveSpeed * runMultiplier * Time.deltaTime);
@@ -43,8 +43,8 @@ public class FreeMovementMotor : MovementMotorBase
         if (moveDir == Vector3.zero) moveDir = transform.forward;
 
         // Collision check and slide
-        IsMoving = capsuleMover.CanMove(input, transform.position, ref moveDir) && currentSpeed > 0.01f;
-        IsRunning = runHeld && IsMoving;
+        IsMoving = CanMove(moveDir, transform.position, ref moveDir) && currentSpeed > 0.01f;
+        IsRunning = IsRunning && IsMoving;
         Speed = currentSpeed;
         ForwardSpeed = IsMoving ? currentSpeed : 0f;
 
@@ -76,5 +76,16 @@ public class FreeMovementMotor : MovementMotorBase
         ForwardSpeed = 0f;
         TurnSpeed = 0f;
         moveDir = Vector3.zero;
+        MoveDirection = Vector3.zero;
+    }
+
+    public override void OnSprint(bool isSprinting)
+    {
+        IsRunning = isSprinting;
+    }
+
+    private bool CanMove(Vector3 input, Vector3 position, ref Vector3 direction)
+    {
+        return capsuleMover.TryApplyMovement(input, position, ref direction);
     }
 }

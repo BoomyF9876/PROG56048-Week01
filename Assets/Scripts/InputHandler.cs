@@ -18,8 +18,13 @@ public class InputHandler : MonoBehaviour
             shooter = GetComponent<Shooter>();
         }
 
+        if (motor == null)
+        {
+            motor = GetComponent<PointAndClickMotor>();
+        }
+
         fireCommand = new ShootCommand(shooter);
-        //jumpCommand = new JumpCommand(motor);
+        jumpCommand = new JumpCommand(motor);
     }
 
     private void OnEnable()

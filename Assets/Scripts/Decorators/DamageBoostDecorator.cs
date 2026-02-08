@@ -2,19 +2,21 @@ using UnityEngine;
 
 public class DamageBoostDecorator: WeaponDecorator
 {
-    private int bonusDamage;
+    private int bonusDamage = 5;
 
-    public DamageBoostDecorator(
-        IWeapon _weapon,
-        int _bonusDamage
-    ): base(_weapon)
+    public DamageBoostDecorator(IWeapon _weapon): base(_weapon)
     {
-        bonusDamage = _bonusDamage;
+    }
+
+    public override Projectile Fire(Vector3 pos, Quaternion rot, ProjectilePool pool)
+    {
+        Projectile bullet = base.Fire(pos, rot, pool);
+        bullet.GetComponent<Bullet>().SetDamage(bonusDamage);
+        return bullet;
     }
 
     public override int GetDamage()
     {
         return base.GetDamage() + bonusDamage;
     }
-
 }

@@ -13,10 +13,15 @@ public class TankMotor : MovementMotorBase
     [Tooltip("Rotation speed")]
     [SerializeField] private float rotationSpeed = 180f;
 
-    override public void Start()
+    override protected void OnEnable()
     {
-        base.Start();
+        base.OnEnable();
         capsuleMover.AllowSliding = false;
+    }
+
+    public override void OnSprint(bool isSprinting)
+    {
+        IsRunning = isSprinting;
     }
 
     /// <summary>
@@ -45,11 +50,12 @@ public class TankMotor : MovementMotorBase
             return;
         }
 
+        Vector3 inputDir = new Vector3(input.x, 0f, input.y);
         // Determine move direction
         Vector3 moveDir = transform.forward * Mathf.Sign(input.y);
         
         // Collision check
-        IsMoving = capsuleMover.CanMove(input, transform.position, ref moveDir);
+        IsMoving = CanMove(inputDir, transform.position, ref moveDir);
         
         if (IsMoving)
         {
@@ -72,5 +78,10 @@ public class TankMotor : MovementMotorBase
         ForwardSpeed = 0f;
         TurnSpeed = 0f;
         MoveDirection = Vector3.zero;
+    }
+
+    private bool CanMove(Vector3 input, Vector3 position, ref Vector3 direction)
+    {
+        return capsuleMover.TryApplyMovement(direction, position, ref direction);
     }
 }

@@ -20,7 +20,7 @@ public sealed class Shooter : MonoBehaviour
     [Tooltip("The bullet prefab.")]
     [SerializeField] private Rigidbody bulletPrefab;  
     [Tooltip("The fire cooldown.")]
-    [SerializeField] private float fireCooldown = 0.25f;
+    [SerializeField] private float fireCooldown = 0.1f;
 
     [SerializeField] private ProjectilePool projectilePool;
 
@@ -46,8 +46,10 @@ public sealed class Shooter : MonoBehaviour
 
         if (GameManager.Instance.IsGamePlaying() && muzzle != null)
         {
-            Projectile bullet = projectilePool.GetBulletFromPool(muzzle.position, muzzle.rotation);
-            bullet.Launch();
+            //Projectile bullet = projectilePool.GetBulletFromPool(muzzle.position, muzzle.rotation);
+            //bullet.Launch();
+
+            powerUpManager.GetCurrentWeapon().Fire(muzzle.position, muzzle.rotation, projectilePool);
 
             nextFireTime = Time.time + fireCooldown;
             animator.SetTrigger(shootHash);

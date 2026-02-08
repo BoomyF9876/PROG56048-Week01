@@ -1,4 +1,4 @@
 public interface IVisitableEnemy
 {
-    void Accept(IDamageVisitor visitor, int damage);
+    void Accept(IDamageVisitor visitor, float damage);
 }

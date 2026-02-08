@@ -10,7 +10,7 @@ public abstract class MovementMotorBase : MonoBehaviour
     protected Vector2 input = Vector2.zero;
     protected CapsuleMover capsuleMover;
 
-    public virtual void Start()
+    protected virtual void Awake()
     {
         capsuleMover = GetComponent<CapsuleMover>();
     }
@@ -26,7 +26,7 @@ public abstract class MovementMotorBase : MonoBehaviour
         {
             inputReader.MoveEvent += OnMove;
             inputReader.SprintEvent += OnSprint;
-            inputReader.RightClick += OnRightClick;
+            inputReader.AttackEvent += OnRightClick;
         }
     }
 
@@ -36,7 +36,7 @@ public abstract class MovementMotorBase : MonoBehaviour
         {
             inputReader.MoveEvent -= OnMove;
             inputReader.SprintEvent -= OnSprint;
-            inputReader.RightClick -= OnRightClick;
+            inputReader.AttackEvent -= OnRightClick;
         }
     }
 
