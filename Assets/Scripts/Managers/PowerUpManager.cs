@@ -17,14 +17,6 @@ public class PowerUpManager: Singleton<PowerUpManager>
 
     public void AddPowerUp(PowerUpType type)
     {
-        if (powerUps.ContainsKey(type))
-        {
-            powerUps[type] = Mathf.Clamp(powerUps[type] + 1, 0, 5);
-        }
-        else
-        {
-            powerUps.Add(type, 1);
-        }
         switch (type)
         {
             case PowerUpType.DamageBoost:
@@ -36,13 +28,18 @@ public class PowerUpManager: Singleton<PowerUpManager>
             case PowerUpType.Burn:
                 weapon = new FireDecorator(weapon);
                 break;
-
         }
 
-        //Debug.Log("Damage: " + weapon.GetDamage());
-        //Debug.Log("Crit: " + weapon.GetCrit());
-        //Debug.Log("Type: " + weapon.GetDamageType().ToString());
-        //UIManager.Instance.weaponPanel.PowerUp(type);
+        if (powerUps.ContainsKey(type))
+        {
+            powerUps[type] = Mathf.Clamp(powerUps[type] + 1, 0, 5);
+        }
+        else
+        {
+            powerUps.Add(type, 1);
+        }
+
+        UIManager.Instance.panel.PowerUp(type);
     }
 
     public IWeapon GetCurrentWeapon()

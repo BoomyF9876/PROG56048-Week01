@@ -1,21 +1,19 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseState : IGameState
 {
-    private GameObject obj = GameObject.FindFirstObjectByType<PauseController>().gameObject.transform.Find("PauseMenu").gameObject;
-
     public void EnterState(GameManager gameManager)
     {
-        obj.SetActive(true);
+        SceneLoader.Instance.LoadScene("_PauseScene", LoadSceneMode.Additive);
+        //SceneLoader.Instance.SetActiveScene("_PauseScene");
     }
 
     public void UpdateState(GameManager gameManager)
-    {
-        //Debug.Log("Update Pause State...");
-    }
+    {}
 
     public void ExitState(GameManager gameManager)
     {
-        obj.SetActive(false);
+        SceneLoader.Instance.UnloadScene("_PauseScene");
     }
 }

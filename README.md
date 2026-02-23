@@ -1,13 +1,20 @@
 Unity version: 6000.3.2f1
+Scene list:
+    Bootstrap
+    Options Menu
+    Pause Menu
+    Main Menu
+    First Scene
+    Second Scene
 Controls: WASD to move, SPACE to shoot, ESC to pause game
-How I completed each task:
-    Task01 Refactor code base based on class slides & uml
-    Task02 Refactor code base based on class slides & uml
-    Task03 Add a startgame scene
-    Task04 Add a new layer for trigger zone
-    Task05 Refactor code base based on class slides & uml
-    UIManager Add a new UI canvas, subscribe to event bus
-LSP note: Player is able to swap any motor since all the motors are based on the same abstract class
+
+Bootstrap: The scene that preloads all the listed scenes
+Manager scenes: Once loaded it won't be destroyed by switching scenes
+How levels transition: Swap if it is Single, Pile if it is additive
+Enemy types: Flying & Armored
+Power-ups: Damage, Crit, Fire 
+Motors: FreeMovement, Tank, FollowTarget, PointAndClick
+
 Asset credits:
     VO_02_002.dspadpcm.wav - https://sounds.spriters-resource.com/3ds/beybladeburstjpn/asset/501980/
     PointAndClick.png - https://www.pixtastock.com/illustration/83403569
@@ -15,6 +22,6 @@ Asset credits:
     Tank.png - https://www.freepik.com/free-photos-vectors/tank
     FreeMovement.png - https://pixabay.com/images/search/walking%20sign/
 Known issues:
-    Player animation is paused when exits freemovement state
+    MouseUtils not working after scene switch
 Repo:
     https://github.com/BoomyF9876/PROG56048-Week01

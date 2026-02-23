@@ -1,10 +1,18 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
     private IGameState currentState;
-    public void SwitchState(IGameState newState)
+    private Stack<IGameState> stateHistory = new Stack<IGameState>();
+
+    public void SwitchState(IGameState newState, bool addToHistory = false)
     {
+        if (addToHistory)
+        {
+            stateHistory.Push(currentState);
+        }
+
         currentState?.ExitState(this);
         currentState = newState;
         currentState.EnterState(this);
@@ -12,7 +20,10 @@ public class GameManager : Singleton<GameManager>
 
     public void Update()
     {
-        currentState.UpdateState(this);
+        if (currentState != null)
+        {
+            currentState.UpdateState(this);
+        }
     }
 
     public bool IsGamePlaying()
@@ -23,5 +34,13 @@ public class GameManager : Singleton<GameManager>
     public IGameState GetCurrentState()
     {
         return currentState;
+    }
+
+    public void ResumePreviousState()
+    {
+        if (stateHistory.Count > 0)
+        {
+            SwitchState(stateHistory.Pop(), addToHistory: false);
+        }
     }
 }

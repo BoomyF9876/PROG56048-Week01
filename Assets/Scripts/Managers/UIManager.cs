@@ -1,19 +1,29 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
-    private TMP_Text m_TextComponent;
-    private Image m_Image;
+    [SerializeField] private TMP_Text m_TextComponent;
+    [SerializeField] private Image m_Image;
+    public PowerUpPanel panel;
+    public int enemiesExisted = 2;
 
-    private void Awake()
+    override public void Awake()
     {
-        m_TextComponent = GetComponentInChildren<TMP_Text>();
-        m_Image = transform.Find("ControlImage").GetComponent<Image>();
-
         ChangeUIText(MotorType.FreeMovement);
         ChangeUIImage(MotorType.FreeMovement);
+    }
+
+    private void Update()
+    {
+        if (enemiesExisted <= 0)
+        {
+            GameManager.Instance.SwitchState(new NextLevelState());
+        }
     }
 
     private void OnEnable()
@@ -34,11 +44,13 @@ public class UIManager : MonoBehaviour
 
     private void ChangeUIText(MotorType type)
     {
+        if (m_TextComponent == null) return;
         m_TextComponent.text = "Motor: " + type.ToString();
     }
 
     private void ChangeUIImage(MotorType type)
     {
+        if (m_Image == null) return;
         Sprite newSprite = Resources.Load<Sprite>(type.ToString());
 
         if (newSprite != null)

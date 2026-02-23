@@ -5,12 +5,14 @@ public class NewGameState : IGameState
 {
     public void EnterState(GameManager gameManager)
     {
-        SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
+        SceneLoader.Instance.LoadScene("MainScene", LoadSceneMode.Single);
+        //SceneLoader.Instance.SetActiveScene("MainScene");
+        GameManager.Instance.SwitchState(new PlayingState());
     }
 
     public void UpdateState(GameManager gameManager)
     {
-        //Debug.Log("Update New Game State...");
+        
     }
 
     public void ExitState(GameManager gameManager)

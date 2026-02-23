@@ -27,7 +27,6 @@ public sealed class Shooter : MonoBehaviour
     private int shootHash;
     private float nextFireTime;
     private IWeapon weapon;
-    private PowerUpManager powerUpManager;
 
     private void Awake()
     {
@@ -36,7 +35,6 @@ public sealed class Shooter : MonoBehaviour
         if (animator == null) animator = GetComponentInChildren<Animator>();
         if (animator == null) Debug.LogError($"[{nameof(Shooter)}] Animator not found.");
         if (projectilePool == null) projectilePool = GetComponent<ProjectilePool>();
-        if (powerUpManager == null) powerUpManager = GetComponent<PowerUpManager>();
         shootHash = Animator.StringToHash(shootTrigger);
     }
 
@@ -49,7 +47,7 @@ public sealed class Shooter : MonoBehaviour
             //Projectile bullet = projectilePool.GetBulletFromPool(muzzle.position, muzzle.rotation);
             //bullet.Launch();
 
-            powerUpManager.GetCurrentWeapon().Fire(muzzle.position, muzzle.rotation, projectilePool);
+            PowerUpManager.Instance.GetCurrentWeapon().Fire(muzzle.position, muzzle.rotation, projectilePool);
 
             nextFireTime = Time.time + fireCooldown;
             animator.SetTrigger(shootHash);

@@ -1,6 +1,6 @@
 public interface IHealth
 {
-    void TakeDamage(float amount);
+    void TakeDamage(float amount, bool isDemo = false);
 
     float CurrentHealth {  get; }
 

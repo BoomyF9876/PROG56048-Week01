@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 0f39231718d110a4c942e92b31c96d8a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _selector: {instanceID: 0}
+  - _obstacle: {instanceID: 0}
+  - _waypoint: {instanceID: 0}
+  - _start: {instanceID: 0}
+  - _end: {instanceID: 0}
+  - _plane: {instanceID: 0}
+  - _AStarPrefab: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

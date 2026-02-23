@@ -11,7 +11,7 @@ public class DamageBoostDecorator: WeaponDecorator
     public override Projectile Fire(Vector3 pos, Quaternion rot, ProjectilePool pool)
     {
         Projectile bullet = base.Fire(pos, rot, pool);
-        bullet.GetComponent<Bullet>().SetDamage(bonusDamage);
+        bullet.GetComponent<Bullet>().SetDamage(GetDamage());
         return bullet;
     }
 

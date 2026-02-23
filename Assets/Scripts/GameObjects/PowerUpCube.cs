@@ -15,9 +15,9 @@ public class PowerUpCube : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out PowerUpManager manager))
+        if (other.TryGetComponent(out PlayerController player))
         {
-            manager.AddPowerUp(powerUpType);
+            PowerUpManager.Instance.AddPowerUp(powerUpType);
             Destroy(gameObject);
         }
     }

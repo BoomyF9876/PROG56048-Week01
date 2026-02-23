@@ -1,19 +1,21 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class OptionsMenu : IGameState
 {
     public void EnterState(GameManager gameManager)
     {
-        Debug.Log("Enter Options Menu State...");
+        SceneLoader.Instance.LoadScene("_OptionsScene", LoadSceneMode.Additive);
+        //SceneLoader.Instance.SetActiveScene("_OptionsScene");
     }
 
     public void UpdateState(GameManager gameManager)
     {
-        Debug.Log("Update Options Menu State...");
+        //Debug.Log("Update Options Menu State...");
     }
 
     public void ExitState(GameManager gameManager)
     {
-        Debug.Log("Exit Options Menu State...");
+        SceneLoader.Instance.UnloadScene("_OptionsScene");
     }
 }

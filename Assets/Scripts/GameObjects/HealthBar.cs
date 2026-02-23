@@ -34,7 +34,7 @@ public class HealthBar : MonoBehaviour
 
     public void Update()
     {
-        transform.rotation = Camera.main.transform.rotation;
+        //transform.rotation = Camera.main.transform.rotation;
 
         if (healthFillImage.fillAmount != targetFillAmount)
         {
@@ -42,17 +42,18 @@ public class HealthBar : MonoBehaviour
         }
     }
 
-    public void UpdateHealth(float percentage, float damage)
+    public void UpdateHealth(float percentage, float damage, Color color)
     {
         targetFillAmount = percentage;
 
         damageNumber.gameObject.SetActive(true);
+        damageNumber.color = color;
         damageNumber.text = ((int)damage).ToString();
 
         if (coroutine != null)
         {
             StopCoroutine(coroutine);
         }
-        coroutine = StartCoroutine(RunFunctionForDuration(2.0f));
+        coroutine = StartCoroutine(RunFunctionForDuration(1.5f));
     }
 }

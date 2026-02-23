@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 /// <summary>
 /// Player controller that handles movement and input.
 /// </summary>
@@ -25,6 +26,24 @@ public class PlayerController : MonoBehaviour
         if (motor == null)
         {
             Debug.LogError($"[{nameof(PlayerController)}] No movement motor found");
+        }
+    }
+
+    public void Update()
+    {
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            switch (GameManager.Instance.GetCurrentState().GetType().ToString())
+            {
+                case "PlayingState":
+                    GameManager.Instance.SwitchState(new PauseState(), true);
+                    break;
+                case "PauseState":
+                    GameManager.Instance.SwitchState(new PlayingState());
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -121,6 +140,15 @@ public class PlayerController : MonoBehaviour
                 break;
             default:
                 break;
+        }
+        MovementMotorBase[] motors = GetComponents<MovementMotorBase>();
+        foreach (MovementMotorBase motor in motors)
+        {
+            if (motor.enabled)
+            {
+                this.motor = motor;
+                break;
+            }
         }
         audioSource.Play();
     }

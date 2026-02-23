@@ -1,39 +1,44 @@
-using System;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class PauseController : MonoBehaviour
 {
+    [Header("UI Components")]
+    [Tooltip("Slider for master volume.")]
+    [SerializeField] private Button resumeButton;
+    [Tooltip("Slider for music volume.")]
+    [SerializeField] private Button mainMenuButton;
+    [Tooltip("Slider for SFX volume.")]
+    [SerializeField] private Button optionsButton;
+    [Tooltip("Button to close the options menu.")]
+    [SerializeField] private Button backButton;
+
     public void Start()
     {
-        GameManager.Instance.SwitchState(new PlayingState());
+        InitializeUIComponents();
     }
 
-    public void ResumeGame()
+    private void InitializeUIComponents()
     {
-        GameManager.Instance.SwitchState(new PlayingState());
-    }
-
-    public void PauseGame()
-    {
-        GameManager.Instance.SwitchState(new PauseState());
-    }
-
-    public void Update()
-    {
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        backButton.onClick.AddListener(() =>
         {
-            switch (GameManager.Instance.GetCurrentState().GetType().ToString())
-            {
-                case "PlayingState":
-                    PauseGame();
-                    break;
-                case "PauseState":
-                    ResumeGame();
-                    break;
-                default:
-                    break;
-            }
-        }
+            GameManager.Instance.ResumePreviousState();
+        });
+
+        resumeButton.onClick.AddListener(() =>
+        {
+            GameManager.Instance.SwitchState(new PlayingState());
+        });
+
+        optionsButton.onClick.AddListener(() =>
+        {
+            GameManager.Instance.SwitchState(new OptionsMenu(), true);
+        });
+
+        mainMenuButton.onClick.AddListener(() =>
+        {
+            GameManager.Instance.SwitchState(new MainMenuState(), true);
+        });
     }
 }

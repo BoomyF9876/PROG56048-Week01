@@ -14,8 +14,9 @@ public class FlyingEnemy : MonoBehaviour, IVisitableEnemy
         visitor.VisitFlying(this, damage);
     }
 
-    public void ApplyDamage(float damage, Color numberColor)
+    public void ApplyDamage(float damage, Color numberColor, bool isDemo = false)
     {
-        health.TakeDamage(damage);
+        health.TakeDamage(damage, isDemo);
+        health.ShowDamageNumber(damage, numberColor);
     }
 }

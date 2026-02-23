@@ -16,15 +16,15 @@ public class HealthComponent: MonoBehaviour, IHealth
         if (healthBar == null) healthBar = GetComponentInChildren<HealthBar>();
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, bool isDemo = false)
     {
         health -= damage;
 
-        Debug.Log(health);
-
-        healthBar.UpdateHealth(GetHealthPercentage(), damage);
-
-        if (health <= 0) Die();
+        if (health <= 0)
+        {
+            Die();
+            if (!isDemo) UIManager.Instance.enemiesExisted--;
+        }
     }
 
     public void Heal()
@@ -42,8 +42,8 @@ public class HealthComponent: MonoBehaviour, IHealth
         return health / maxHealth;
     }
 
-    public void ShowDamageNumber(float damage, Vector3 numberColor)
+    public void ShowDamageNumber(float damage, Color numberColor)
     {
-
+        healthBar.UpdateHealth(GetHealthPercentage(), damage, numberColor);
     }
 }

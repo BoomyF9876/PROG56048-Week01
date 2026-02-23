@@ -14,8 +14,9 @@ public class ArmoredEnemy: MonoBehaviour, IVisitableEnemy
         visitor.VisitArmored(this, damage);
     }
 
-    public void ApplyDamage(float damage, Color numberColor)
+    public void ApplyDamage(float damage, Color numberColor, bool isDemo = false)
     {
-        health.TakeDamage(damage);
+        health.TakeDamage(damage, isDemo);
+        health.ShowDamageNumber(damage, numberColor);
     }
 }
